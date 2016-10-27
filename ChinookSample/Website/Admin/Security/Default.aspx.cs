@@ -55,12 +55,12 @@ public partial class Admin_Security_Default : System.Web.UI.Page
             //Coplumns are index(starting at 0)
             UnRegisteredUserProfile user = new UnRegisteredUserProfile()
             {
-                UserId = int.Parse(UnregisteredUsersGridView.SelectedDataKey.Value.ToString()),
+                CustomerEmployeeId = int.Parse(UnregisteredUsersGridView.SelectedDataKey.Value.ToString()),
                 UserType = (UnRegisteredUserType)Enum.Parse(typeof(UnRegisteredUserType), agvrow.Cells[1].Text),
                 FirstName = agvrow.Cells[2].Text,
                 LastName = agvrow.Cells[3].Text,
-                UserName = assignedUserName,
-                Email = assignedemail
+                AssignedUserName = assignedUserName,
+                AssignedEmail = assignedemail
             };
 
             //register the user viq the chinnok.UserManager controller
@@ -70,6 +70,35 @@ public partial class Admin_Security_Default : System.Web.UI.Page
             //assume successful creation os a user
             //referesh the form
             DataBind();
+        }
+    }
+
+    protected void UserListView_ItemInserting(object sender, ListViewInsertEventArgs e)
+    {
+        //one needs to walk through the check box list
+
+        //create the RoleMembership string List of selected Roles
+        var addtoroles = new List<string>();
+
+        //point to the physical checkboxlist Control
+        var roles = e.Item.FindControl("RoleMemberships") as CheckBoxList;
+
+        //does this control exists -safety check
+        if (roles != null)
+        {
+            //cycle through the checkboxList
+            //find which roles have been selected (checked)
+            //add to the List<string>
+            //assign the List<string> to the inserting instance
+            //represented by e
+            foreach(ListItem role in roles.Items)
+            {
+                if (role.Selected)
+                {
+                    addtoroles.Add(role.Value);
+                }
+                e.Values["RoleMemberships"] = addtoroles;
+            }
         }
     }
 }
