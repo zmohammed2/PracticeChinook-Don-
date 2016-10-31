@@ -37,6 +37,7 @@ namespace ChinookSystem.DAL
         public DbSet<Genre> Genres { get; set; }
 
         public DbSet<PlayList> PlayLists { get; set; }
+       
 
         //Modelling of our many-to-many relation between Tracks and PlayLists
         //No entity was coded for the physical database table PlaylistTracks
