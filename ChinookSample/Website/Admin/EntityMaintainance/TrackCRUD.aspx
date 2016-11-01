@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="TrackCRUD.aspx.cs" Inherits="Admin_EntityMaintainance_TrackCRUD" %>
 
+<%@ Register Src="~/UserControl/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
+    <div class="jumbotron"><h3>Wired ListView CRUD</h3></div>
+    <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
     <asp:ListView ID="TrackList" runat="server" DataSourceID="TrackListODS" InsertItemPosition="LastItem" DataKeyNames="TrackId">
         <AlternatingItemTemplate>
             <tr style="background-color: #FFF8DC;">
@@ -214,7 +219,7 @@
 
     <asp:ObjectDataSource ID="TrackListODS" runat="server" DataObjectTypeName="ChinookSystem.Data.Entities.Track" 
         DeleteMethod="DeleteTrack" InsertMethod="AddTrack" OldValuesParameterFormatString="original_{0}" 
-        SelectMethod="ListTracks" TypeName="ChinookSystem.BLL.TrackController" UpdateMethod="UpdateTrack"></asp:ObjectDataSource>
+        SelectMethod="ListTracks" TypeName="ChinookSystem.BLL.TrackController" UpdateMethod="UpdateTrack" OnDeleted="CheckForException" OnInserted="CheckForException" OnUpdated="CheckForException"></asp:ObjectDataSource>
     
     <asp:ObjectDataSource ID="AlbumListODS" runat="server" OldValuesParameterFormatString="original_{0}"
          SelectMethod="AlbumList" TypeName="ChinookSystem.BLL.AlbumController"></asp:ObjectDataSource>
