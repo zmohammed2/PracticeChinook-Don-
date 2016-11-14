@@ -36,8 +36,9 @@ namespace ChinookSystem.DAL
         public DbSet<InvoiceLine> InvoiceLines { get; set; }
         public DbSet<Genre> Genres { get; set; }
 
-        public DbSet<PlayList> PlayLists { get; set; }
-       
+        public DbSet<Playlist> PlayLists { get; set; }
+        public DbSet<PlaylistTrack> PlaylistTracks { get; set; }
+
 
         //Modelling of our many-to-many relation between Tracks and PlayLists
         //No entity was coded for the physical database table PlaylistTracks
@@ -54,7 +55,7 @@ namespace ChinookSystem.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
-                .Entity<PlayList>().HasMany(r => r.Tracks)
+                .Entity<Playlist>().HasMany(r => r.Tracks)
                 .WithMany(t => t.PlayLists)
                 .Map(mapping =>
                 {

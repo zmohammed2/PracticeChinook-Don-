@@ -44,6 +44,8 @@ namespace ChinookSystem.BLL
             using (var context = new ChinookContext())
             {
                 int tracknumber = 0;
+                PlaylistTrack newtrack = null;
+
                 Playlist existing = (from x in context.PlayLists
                                      where x.Name.Equals(playlistname)
                                      && x.CustomerId == customerid
@@ -60,9 +62,10 @@ namespace ChinookSystem.BLL
                 else
                 {
                     tracknumber = existing.PlaylistTracks.Count() + 1;
+                    newtrack = existing.PlaylistTracks.SingleOrDefault(x => x.TrackId == trackid);
                 }
                 
-                PlaylistTrack newtrack = context.PlaylistTracks.Find(existing.PlaylistId, trackid);
+                //PlaylistTrack newtrack = context.PlaylistTracks.Find(existing.PlaylistId, trackid);
                 if (newtrack != null)
                 {
                     throw new Exception("Playlist already has requested track.");
