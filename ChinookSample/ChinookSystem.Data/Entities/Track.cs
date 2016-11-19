@@ -48,11 +48,14 @@ namespace ChinookSystem.Data.Entities
         public int? GenreId { get; set; }
         [StringLength(220, ErrorMessage = "Composer is too long.Max Characters: 220")]
         public string Composer { get; set; }
+
         [Required(ErrorMessage = "MSec is a Required field")]
         [Range(1.0, double.MaxValue, ErrorMessage = "Inavalid Msec,Must be greaterthan 0")]
         public int Milliseconds { get; set; }
+
         [Range(1.0, double.MaxValue, ErrorMessage = "Inavalid Bytes,Must be greaterthan 0")]
         public int? Bytes { get; set; }
+
         [Required(ErrorMessage = "Price is a Required field")]
         [Range(0.0, double.MaxValue, ErrorMessage = "Inavalid Price,Must be 0 or greater")]
         public decimal UnitPrice { get; set; }
